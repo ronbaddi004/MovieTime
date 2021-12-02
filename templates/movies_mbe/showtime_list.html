@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-flex" style="display: block ruby;">
+        <h2>Show Time: {{ movie.name }}</h2>
+        <a class="btn btn-primary float-end" href="{% url 'showtime-create' movie_id=movie.id %}">Create ShowTime</a>
+    </div>
+
+    <hr class="bg-danger border-2 border-top border-danger">
+        <!-- <div class="container-flex" style="display: block ruby;">
+            <h3><a href="{% url 'movie-update' id=movie.pk %}">{{ movie.name }}</a></h3>
+        </div> -->
+        {% if object_list %}
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for showtime in object_list %}
+                        <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ showtime.timing|date:"d-m-Y" }}</td>
+                        <td>{{ showtime.timing|time:"H:i" }}</td>
+                        <td>{{ showtime.location }}</td>
+                        <td>
+                            <a href="{% url 'showtime-update' movie_id=showtime.movie.id id=showtime.id %}" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+                            <a href="{% url 'showtime-delete' movie_id=showtime.movie.id id=showtime.id %}" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+                        </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3>No Showtime to be Found!!</h3>
+        {% endif %}
+    </ul>
+{% endblock content %}

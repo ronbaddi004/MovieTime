@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Security token -->
+    <div class="container">
+        <h1>Update Showtime: {{ object.movie.name }}</h1>
+        <div class="jumbotron" style="padding-top:3%; padding-bottom:3%; margin-bottom:8%">
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <!-- {% include "includes/form.html" %} -->
+            {% load widget_tweaks %}
+
+            <div class="form-group mb-4">
+            {% render_field form.timing type="datetime-local" class="form-control" placeholder="Time" %}
+            </div>
+
+            <div class="form-group mb-4">
+            {% render_field form.location type="text" class="form-control" placeholder="Location" %}
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> Update
+            </button>
+            <a class="btn btn-primary" href="{% url 'showtime-list' movie_id=object.movie.id %}"> Cancel </a>
+          </form>
+        </div>
+    </div>
+    <script>
+    $(function () {
+        $("#datetimepicker1").datetimepicker({
+        format: 'DD/MM/YYYY HH:mm',
+        });
+    });
+    </script>
+{% endblock content %}

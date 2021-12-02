@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container-flex" style="display: block ruby;">
+        <h2>Movies</h2>
+        <a class="btn btn-primary float-end" href="{% url 'movie-create' %}">Create Movie</a>
+    </div>
+
+    <hr class="bg-danger border-2 border-top border-danger">
+        {% for movie in object_list %}
+            <!-- <h3><a href="{% url 'movie-update' id=movie.pk %}">{{ movie.name }}</a></h3> -->
+            <div class="container-flex" style="display: block ruby;">
+                <h3><a href="{% url 'showtime-list' movie_id=movie.pk %}">{{ movie.name }}</a></h3>
+                <a class="btn btn-danger float-end" href="{% url 'movie-delete' id=movie.id %}">Delete</a>
+                <a class="btn btn-success float-end me-2" href="{% url 'movie-update' id=movie.id %}">Update</a>
+            </div>
+            <p>Released Date: {{ movie.released_date }}</p>
+            <p>Details: {{ movie.description }}</p>
+        {% endfor %}
+    </ul>
+{% endblock content %}

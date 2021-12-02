@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Security token -->
+    <div class="container">
+        <h1>Create Movie:</h1>
+        <div class="jumbotron" style="padding-top:3%; padding-bottom:3%; margin-bottom:8%">
+          <form method="post" novalidate>
+            {% csrf_token %}
+
+            <!-- {% include "includes/form.html" %} -->
+            {% load widget_tweaks %}
+
+            <div class="form-group mb-4">
+            {% render_field form.name class="form-control" placeholder="Name" type="text" %}
+            </div>
+
+            <div class="form-group mb-4">
+            {% render_field form.description type="text" class="form-control" placeholder="Description" %}
+            </div>
+
+            <div class="form-group mb-4">
+            {% render_field form.released_date type="date" class="form-control" placeholder="Released Date" %}
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-ok"></span> Save
+            </button>
+          </form>
+        </div>
+    </div>
+{% endblock content %}
