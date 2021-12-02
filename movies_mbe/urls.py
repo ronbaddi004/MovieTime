@@ -3,7 +3,7 @@ from movies_mbe.views import MovieListView, MovieDeleteView, MovieCreateView, Mo
 from movies_mbe.views import ShowtimeListView, ShowtimeCreateView, ShowtimeUpdateView, ShowtimeDeleteView
 
 urlpatterns = [
-    path('movies/', MovieListView.as_view(), name="movies-list"),
+    path('', MovieListView.as_view(), name="movies-list"),
     path('movies/add', MovieCreateView.as_view(), name="movie-create"),
     path('movies/<int:id>', MovieUpdateView.as_view(), name='movie-update'),
     path('movies/<int:id>/delete', MovieDeleteView.as_view(), name='movie-delete'),
